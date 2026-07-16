@@ -3,7 +3,7 @@ CREATE TABLE Employees (
     EmployeeID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName NVARCHAR(50),
     LastName NVARCHAR(50),
-    Age TINYINT,
+    Age TINYINT, 
     Salary DECIMAL(10,2),
     HireDate DATE,
     LastLogin DATETIME2,
@@ -39,3 +39,28 @@ VALUES
 ('Mark','Lewis',40,70000.00,'2015-06-18','2024-01-19 12:00:00',1,'Management','mark.lewis@company.com',4.8,'Operations'),
 ('Karen','Lee',27,40000.00,'2022-09-09','2024-01-20 13:10:00',1,'Support','karen.lee@company.com',4.0,'Support agent');
 
+
+
+-- SELECT * FROM Employees;
+
+-- SELECT Salary FROM Employees;
+
+-- SELECT FirstName, HireDate FROM Employees;
+
+-- SELECT * FROM Employees WHERE Age < 30;
+
+-- Realizar una consulta que calcule todos aquellos empleados que ganan mas de 40 mil
+
+-- SELECT * FROM Employees WHERE Salary > 40000;
+
+-- SELECT COUNT(*) FROM Employees;
+
+-- SELECT * FROM Employees WHERE HireDate > '2020-12-31';
+
+-- crear una consulta que devuelva todos los empleados que como notas tengan 'Top seller'
+
+-- SELECT * FROM Employees WHERE Notes = 'Top seller';
+
+-- SELECT count(*) FROM Employees WHERE Notes = 'Top seller';
+
+GO
