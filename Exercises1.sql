@@ -1,7 +1,3 @@
-CREATE DATABASE employeesdb;
-
-USE employeesdb;
-
 CREATE TABLE employees
 (
     employee_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -12,7 +8,7 @@ CREATE TABLE employees
     salary DECIMAL(10,2),
     hire_date DATE,
     last_login DATETIME,
-    is_active BIT,
+    is_active BIT, -- 0 1
     department NVARCHAR(50),
     rating DECIMAL(3,2),
     vacation_hours SMALLINT,
@@ -79,54 +75,80 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 -- Exercise 1
 
 -- Display all employees.
+-- SELECT * FROM employees;
 
 -- Exercise 2
 
 -- Display only the first_name, last_name, and department of all employees.
 
+-- SELECT first_name, last_name, department from employees;
+
 -- Exercise 3
 
 -- Find all employees who work in the IT department.
+
+-- SELECT * from employees where department = 'IT';
 
 -- Exercise 4
 
 -- Find all employees whose salary is greater than 60,000.
 
+-- select first_name, salary from employees where salary > 60000;
+
 -- Exercise 5
 
 -- Display all active employees (is_active = 1).
+
+-- select first_name, is_active from employees where is_active = 1;
 
 -- Exercise 6
 
 -- Display all inactive employees.
 
+-- select first_name, is_active from employees where is_active = 0;
+-- select first_name, is_active from employees where is_active <> 1;
+
 -- Exercise 7
 
 -- Find employees who are 30 years old or older.
+
+-- select * from employees where age >= 30;
 
 -- Exercise 8
 
 -- Find employees hired after January 1, 2021.
 
+-- select * from employees where hire_date > '2020-12-31';
+
 -- Exercise 9
 
 -- Display employees whose salary is between 50,000 and 70,000.
+
+-- select first_name, salary from employees where salary between 50000 and 70000;
 
 -- Exercise 10
 
 -- Find employees whose first name starts with the letter A.
 
+-- select * from employees where first_name LIKE 'A%';
+
 -- Exercise 11
 
 -- Find employees whose last name ends with "son".
+
+-- select * from employees where last_name '%son';
 
 -- Exercise 12
 
 -- Display employees who work in either IT or Finance.
 
+-- select * from employees where department = 'IT' OR department = 'Finance';
+
 -- Exercise 13
 
 -- Display the 10 highest-paid employees.
+
+-- select top 10 * from employees order by salary desc;
 
 -- Exercise 14
 
