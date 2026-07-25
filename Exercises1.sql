@@ -1,5 +1,9 @@
-CREATE TABLE employees
-(
+CREATE DATABASE employeesdb;
+
+USE employeesdb;
+
+CREATE TABLE employees(
+
     employee_id INT IDENTITY(1,1) PRIMARY KEY,
     first_name NVARCHAR(50),
     last_name NVARCHAR(50),
@@ -16,6 +20,7 @@ CREATE TABLE employees
     notes NVARCHAR(200),
     created_at DATETIME2 DEFAULT SYSDATETIME()
 );
+
 
 INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_login,is_active,department,rating,vacation_hours,employee_guid,notes) VALUES ('John','Smith','john.smith@company.com',28,48500.00,'2021-03-15','2025-01-15 08:30:00',1,'IT',4.60,80,NEWID(),'Senior Developer');
 INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_login,is_active,department,rating,vacation_hours,employee_guid,notes) VALUES ('Emma','Johnson','emma.johnson@company.com',35,62000.00,'2019-06-10','2025-01-16 09:10:00',1,'HR',4.90,120,NEWID(),'HR Manager');
@@ -75,7 +80,7 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 -- Exercise 1
 
 -- Display all employees.
--- SELECT * FROM employees;
+SELECT * FROM employees;
 
 -- Exercise 2
 
@@ -154,13 +159,18 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 
 -- Display the 10 lowest-paid employees.
 
+SELECT top 10 * from employees order by salary asc;
+
 -- Exercise 15
 
 -- Sort all employees by last_name in alphabetical order.
+select * from employees order by last_name asc;
 
 -- Exercise 16
 
 -- Sort employees by salary from highest to lowest.
+
+select first_name, last_name, salary from employees order by salary desc;
 
 -- Exercise 17
 
@@ -168,11 +178,15 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 
 -- Hint: Use COUNT().
 
+select count(*) as totalEmployees from employees;
+
 -- Exercise 18
 
 -- Calculate the average salary of all employees.
 
 -- Hint: Use AVG().
+
+select avg(salary) as avg_salary from employees;
 
 -- Exercise 19
 
@@ -180,33 +194,49 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 
 -- Hint: Use MAX().
 
+select max(salary) as max_salary from employees;
+
 -- Exercise 21
 
 -- Display all employees who are under 30 years old.
+
+select first_name, age from employees where age < 30;
 
 -- Exercise 22
 
 -- Find employees whose rating is greater than or equal to 4.5.
 
+select first_name, rating from employees where rating >= 4.5;
+
 -- Exercise 23
 
 -- Display employees who have 80 or more vacation hours.
+
+select * from employees where vacation_hours >= 80;
 
 -- Exercise 24
 
 -- Find employees who were hired during the year 2020.
 
+select * from employees where hire_date between '2020-01-01' and '2020-12-31';
+
 -- Exercise 25
 
 -- Display the first name, last name, and email of employees who are in the Marketing department.
+
+select first_name, last_name, email from employees where department = 'Marketing';
 
 -- Exercise 26
 
 -- Find employees whose first name contains the letter "e".
 
+select * from employees where first_name like '%e%';
+
 -- Exercise 27
 
 -- Display employees whose department is not IT.
+
+select * from employees where department <> 'IT';
 
 -- Exercise 28
 
@@ -218,6 +248,7 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 
 -- Department (A–Z)
 -- Salary (highest to lowest within each department)
+
 -- Exercise 30
 
 -- Find employees who:
@@ -225,3 +256,11 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 -- are active,
 -- have a rating of 4.5 or higher,
 -- and have a salary less than 70,000.
+
+
+-- Base de datos
+-- Tablas
+-- Procedimientos almacenados
+-- Vistas
+-- Disparadores
+-- Cursores
