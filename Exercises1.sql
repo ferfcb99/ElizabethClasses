@@ -243,12 +243,15 @@ select * from employees where department <> 'IT';
 
 -- Find employees who are between 25 and 35 years old (inclusive).
 
+select * from employees where age between 25 and 35;
+
 -- Exercise 29
 
 -- Display all employees sorted by:
 
 -- Department (A–Z)
--- Salary (highest to lowest within each department)
+
+select * from employees order by department asc;
 
 -- Exercise 30
 
@@ -258,31 +261,65 @@ select * from employees where department <> 'IT';
 -- have a rating of 4.5 or higher,
 -- and have a salary less than 70,000.
 
+---------------------------------------------------------------------------------------
+-- AND : P1 (sp1 y sp2) - true o false
+-- OR : P1 (sp1 y sp2) - true o false
+
 ----------------------------------- LOGIC OPERATORS -----------------------------------
 
 -- Exercise 1
 
 -- Retrieve all active employees who work in the IT department and earn more than $50,000.
+select * 
+    from employees 
+        where is_active = 1 and department = 'IT' and salary > 50000;
 
 
 -- Exercise 2
 
 -- Retrieve employees who work in either HR or Finance and are older than 30.
 
+select * 
+    from employees 
+        where department = 'HR' OR department = 'Finance' AND age > 30;
+
+
 
 -- Exercise 3
 
 -- Retrieve employees who are younger than 28 and work in Support or Marketing.
 
+select * 
+    from employees
+        where department = 'Marketing' OR department = 'Support' and age <= 28;
+
+select *
+    from employees
+        where department in ('Marketing','Support') and age <= 28;
+
+-- AND : P1 (sp1 y sp2) - true o false
+-- OR : P1 (sp1 y sp2) - true o false
 
 -- Exercise 4
 
 -- Retrieve employees who work in Sales and have a salary lower than $55,000.
 
+select *
+    from employees 
+        where department = 'Sales' and salary < 55000;
+
+select *
+    from employees 
+        where department in ('Sales') and salary < 55000;
 
 -- Exercise 5
 
 -- Retrieve employees who are inactive or older than 40.
+
+select *
+    from employees 
+        where is_active = 0 OR age > 40;
+
 
 -- Level 2 — Adding LIKE (6–10)
 
@@ -290,10 +327,17 @@ select * from employees where department <> 'IT';
 
 -- Retrieve active employees whose first name starts with J and who work in IT.
 
+select * 
+    from employees
+        where is_active = 1 AND first_name like 'J%' AND department = 'IT';
+
 
 -- Exercise 7
 
 -- Retrieve employees whose last name ends with son and whose salary is greater than $45,000.
+
+select *
+    from employees where last_name like '%son' and salary > 45000;
 
 
 -- Exercise 8
@@ -301,10 +345,29 @@ select * from employees where department <> 'IT';
 -- Retrieve employees who work in Finance or HR and whose email contains company.
 
 
+select *    
+    from employees
+        where (department = 'Finance' OR department = 'HR') AND email like '%company%';
+select *    
+    from employees
+        where department in ('Finance', 'HR') AND email like '%company%';
+
+
 -- Exercise 9
 
 --  Retrieve employees whose first name contains the letter a and who are younger than 35.
 
+select * 
+    from employees
+        where first_name like '%a%' and age < 35;
+
+
+-- ALIAS
+
+select first_name, hire_date
+    from employees e;
+
+-- ALIAS
 
 -- Exercise 10
 
