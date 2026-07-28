@@ -77,6 +77,7 @@ INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_logi
 INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_login,is_active,department,rating,vacation_hours,employee_guid,notes) VALUES ('Caleb','Cook','caleb.cook@company.com',42,83000.00,'2016-02-22','2025-02-01 10:50:00',1,'Finance',4.90,152,NEWID(),'Finance Director');
 INSERT INTO employees (first_name,last_name,email,age,salary,hire_date,last_login,is_active,department,rating,vacation_hours,employee_guid,notes) VALUES ('Stella','Morgan','stella.morgan@company.com',30,55000.00,'2020-04-08','2025-02-02 08:25:00',1,'Operations',4.40,83,NEWID(),'Project Coordinator');
 
+
 -- Exercise 1
 
 -- Display all employees.
@@ -86,74 +87,74 @@ SELECT * FROM employees;
 
 -- Display only the first_name, last_name, and department of all employees.
 
--- SELECT first_name, last_name, department from employees;
+SELECT first_name, last_name, department from employees;
 
 -- Exercise 3
 
 -- Find all employees who work in the IT department.
 
--- SELECT * from employees where department = 'IT';
+SELECT * from employees where department = 'IT';
 
 -- Exercise 4
 
 -- Find all employees whose salary is greater than 60,000.
 
--- select first_name, salary from employees where salary > 60000;
+select first_name, salary from employees where salary > 60000;
 
 -- Exercise 5
 
 -- Display all active employees (is_active = 1).
 
--- select first_name, is_active from employees where is_active = 1;
+select first_name, is_active from employees where is_active = 1;
 
 -- Exercise 6
 
 -- Display all inactive employees.
 
--- select first_name, is_active from employees where is_active = 0;
--- select first_name, is_active from employees where is_active <> 1;
+select first_name, is_active from employees where is_active = 0;
+select first_name, is_active from employees where is_active <> 1;
 
 -- Exercise 7
 
 -- Find employees who are 30 years old or older.
 
--- select * from employees where age >= 30;
+select * from employees where age >= 30;
 
 -- Exercise 8
 
 -- Find employees hired after January 1, 2021.
 
--- select * from employees where hire_date > '2020-12-31';
+select * from employees where hire_date > '2020-12-31';
 
 -- Exercise 9
 
 -- Display employees whose salary is between 50,000 and 70,000.
 
--- select first_name, salary from employees where salary between 50000 and 70000;
+select first_name, salary from employees where salary between 50000 and 70000;
 
 -- Exercise 10
 
 -- Find employees whose first name starts with the letter A.
 
--- select * from employees where first_name LIKE 'A%';
+select * from employees where first_name LIKE 'A%';
 
 -- Exercise 11
 
 -- Find employees whose last name ends with "son".
 
--- select * from employees where last_name '%son';
+select * from employees where last_name '%son';
 
 -- Exercise 12
 
 -- Display employees who work in either IT or Finance.
 
--- select * from employees where department = 'IT' OR department = 'Finance';
+select * from employees where department = 'IT' OR department = 'Finance';
 
 -- Exercise 13
 
 -- Display the 10 highest-paid employees.
 
--- select top 10 * from employees order by salary desc;
+select top 10 * from employees order by salary desc;
 
 -- Exercise 14
 
@@ -257,10 +258,194 @@ select * from employees where department <> 'IT';
 -- have a rating of 4.5 or higher,
 -- and have a salary less than 70,000.
 
+----------------------------------- LOGIC OPERATORS -----------------------------------
 
--- Base de datos
--- Tablas
--- Procedimientos almacenados
--- Vistas
--- Disparadores
--- Cursores
+-- Exercise 1
+
+-- Retrieve all active employees who work in the IT department and earn more than $50,000.
+
+
+-- Exercise 2
+
+-- Retrieve employees who work in either HR or Finance and are older than 30.
+
+
+-- Exercise 3
+
+-- Retrieve employees who are younger than 28 and work in Support or Marketing.
+
+
+-- Exercise 4
+
+-- Retrieve employees who work in Sales and have a salary lower than $55,000.
+
+
+-- Exercise 5
+
+-- Retrieve employees who are inactive or older than 40.
+
+-- Level 2 — Adding LIKE (6–10)
+
+-- Exercise 6
+
+-- Retrieve active employees whose first name starts with J and who work in IT.
+
+
+-- Exercise 7
+
+-- Retrieve employees whose last name ends with son and whose salary is greater than $45,000.
+
+
+-- Exercise 8
+
+-- Retrieve employees who work in Finance or HR and whose email contains company.
+
+
+-- Exercise 9
+
+--  Retrieve employees whose first name contains the letter a and who are younger than 35.
+
+
+-- Exercise 10
+
+-- Retrieve employees who are active and whose last name does not start with M.
+
+-- Level 3 — BETWEEN + AND / OR (11–15)
+
+-- Exercise 11
+
+-- Retrieve employees whose salary is between $45,000 and $60,000 and who work in IT.
+
+
+-- Exercise 12
+
+-- Retrieve employees whose age is between 25 and 35 and who work in Sales or Marketing.
+
+
+-- Exercise 13
+
+-- Retrieve employees hired between January 1, 2019, and December 31, 2021, who are still active.
+
+
+-- Exercise 14
+
+-- Retrieve employees whose salary is not between $50,000 and $70,000 and who belong to Finance.
+
+
+-- Exercise 15
+
+-- Retrieve employees who are between 30 and 40 years old and whose first name starts with A.
+
+-- Level 4 — IN / NOT IN (16–20)
+
+-- Exercise 16
+
+-- Retrieve employees who work in IT, HR, or Finance, and whose salary is greater than $55,000.
+
+
+-- Exercise 17
+
+-- Retrieve employees who do not work in Sales or Marketing and are active.
+
+
+-- Exercise 18
+
+-- Retrieve employees whose age is 25, 30, or 35, and whose last name contains the letter e.
+
+
+-- Exercise 19
+
+-- Retrieve employees hired on one of these dates:
+
+-- 2020-01-15
+-- 2019-03-10
+-- 2021-02-12
+
+-- and who are active.
+
+
+-- Exercise 20
+
+-- Retrieve employees who work in Support, IT, or Finance, whose salary is between $40,000 and $60,000, and who are younger than 32.
+
+-- Level 5 — Multiple Combined Conditions (21–25)
+
+-- Exercise 21
+
+--  Retrieve active employees who:
+
+-- work in IT,
+-- earn between $45,000 and $65,000,
+-- and whose first name starts with M.
+
+-- Exercise 22
+
+-- Retrieve employees who:
+
+-- work in HR or Finance,
+-- are older than 30,
+-- and whose last name ends with n.
+
+-- Exercise 23
+
+-- Retrieve employees who:
+
+-- are not in Management,
+-- have a salary greater than $50,000,
+-- and whose email contains company.
+
+-- Exercise 24
+
+-- Retrieve employees who:
+
+-- work in Sales or Marketing,
+-- are active,
+-- and whose first name does not start with J.
+
+-- Exercise 25
+
+-- Retrieve employees who:
+
+-- are younger than 35,
+-- work in IT, HR, or Support,
+-- and whose salary is not between $40,000 and $50,000.
+-- Level 6 — Complex Logical Expressions (26–30)
+
+-- Exercise 26
+
+-- Retrieve employees who satisfy either of these conditions:
+
+-- work in IT and earn more than $60,000, OR
+-- work in Finance and are older than 35.
+
+-- Exercise 27
+
+-- Retrieve employees who satisfy one of these conditions:
+
+-- work in HR and their first name starts with A,
+-- work in Marketing and earn less than $45,000,
+-- work in Support and are younger than 30.
+
+-- Exercise 28
+
+-- Retrieve employees who satisfy either of these conditions:
+
+-- are active, work in IT, and their salary is between $45,000 and $60,000,
+-- are inactive and work in HR.
+
+-- Exercise 29
+
+-- Retrieve employees who satisfy one of the following:
+
+-- their last name ends with er and they work in Sales,
+-- their first name contains the letter o and they work in Finance,
+-- they work in IT and were hired after January 1, 2020.
+
+-- Exercise 30
+
+-- Retrieve employees who satisfy at least one of these conditions:
+
+-- work in IT, are younger than 30, and are active,
+-- work in Finance, earn more than $60,000, and their last name starts with M,
+-- work in HR or Sales, have a salary between $45,000 and $55,000, and their email contains company,
+-- work in Support, are inactive, and were hired before January 1, 2020.
