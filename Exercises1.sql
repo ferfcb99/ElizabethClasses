@@ -373,31 +373,61 @@ select first_name, hire_date
 
 -- Retrieve employees who are active and whose last name does not start with M.
 
+select *
+from employees
+where is_active = 1 AND last_name NOT LIKE 'M%';
+
 -- Level 3 — BETWEEN + AND / OR (11–15)
 
 -- Exercise 11
 
 -- Retrieve employees whose salary is between $45,000 and $60,000 and who work in IT.
 
+select *
+from employees
+where salary BETWEEN 45000 AND 60000 AND department = 'IT'; 
+
 
 -- Exercise 12
 
 -- Retrieve employees whose age is between 25 and 35 and who work in Sales or Marketing.
+
+select *
+from employees
+where age BETWEEN 25 AND 35 AND department IN ('Sales','Marketing');
+
+select *
+from employees
+where department IN ('Sales','Marketing') and age BETWEEN 25 AND 35;
+
+select *
+from employees
+where age BETWEEN 25 AND 35 AND (department = 'Sales' OR department = 'Marketing');
 
 
 -- Exercise 13
 
 -- Retrieve employees hired between January 1, 2019, and December 31, 2021, who are still active.
 
+select *
+from employees
+where is_active = 1 AND hire_date BETWEEN '2019-01-01' AND '2021-12-31'; 
 
 -- Exercise 14
 
 -- Retrieve employees whose salary is not between $50,000 and $70,000 and who belong to Finance.
 
+select *
+from employees
+where salary BETWEEN 50000 AND 70000 AND department = 'Finance'; 
 
 -- Exercise 15
 
 -- Retrieve employees who are between 30 and 40 years old and whose first name starts with A.
+
+select *
+from employees
+where age BETWEEN 30 AND 40 AND first_name LIKE 'A%';
 
 -- Level 4 — IN / NOT IN (16–20)
 
