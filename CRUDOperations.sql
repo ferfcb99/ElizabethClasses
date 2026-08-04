@@ -31,7 +31,7 @@ update employees
 		where rating = 4.70;
 
 -- Crear una actualizacion que aumente un anio de edad a todos los empleados 
---que tengan mas de 140 horas de vacaciones y ademas tengas como notas 'Solutions Architect'
+-- que tengan mas de 140 horas de vacaciones y ademas tengas como notas 'Solutions Architect'
 
 select *
 	from employees
