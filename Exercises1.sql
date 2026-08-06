@@ -261,6 +261,10 @@ select * from employees order by department asc;
 -- have a rating of 4.5 or higher,
 -- and have a salary less than 70,000.
 
+select *
+from employees
+where is_active = 1 AND rating >= 4.5 AND salary <70000;
+
 ---------------------------------------------------------------------------------------
 -- AND : P1 (sp1 y sp2) - true o false
 -- OR : P1 (sp1 y sp2) - true o false
@@ -435,11 +439,17 @@ where age BETWEEN 30 AND 40 AND first_name LIKE 'A%';
 
 -- Retrieve employees who work in IT, HR, or Finance, and whose salary is greater than $55,000.
 
+select *
+from employees
+where department IN ('IT','HR','Finance') AND salary > 55000;
 
 -- Exercise 17
 
 -- Retrieve employees who do not work in Sales or Marketing and are active.
 
+select *
+from employees
+where is_active = 1 AND department NOT IN ('Sales','Marketing');
 
 -- Exercise 18
 

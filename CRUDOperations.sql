@@ -43,3 +43,15 @@ update employees
 
 
 -- Crear una consulta que actualice todos los departamentos de HR a Human Resources
+
+select *
+from employees
+where department  = 'HR';
+
+update employees
+set department = 'Human Resources'
+where department = 'HR'
+
+select *
+from employees
+where department  = 'Human Resources';

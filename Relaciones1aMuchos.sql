@@ -125,4 +125,20 @@ VALUES
 
 select * from employee;
 
+select e.first_name,  
+from employee e, department d;
+
+select e.first_name, e.salary, d.department_name, d.department_code
+from employee e, department d;
+
+select e.first_name as primer_nombre, e.salary, d.department_code as codigo_departamento, d.department_name
+    from employee e, department d
+        where e.salary > 50000
+            order by first_name asc;
+
+select *
+from employee e INNER JOIN department d on d.department_id = e.department_id;
+
+
+
 
