@@ -456,6 +456,15 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- Retrieve employees whose age is 25, 30, or 35, and whose last name contains the letter e.
 
 
+select *
+    from employees
+        where (age = 25 or age = 30 or age = 35) and last_name like '%e%';
+
+select *
+    from employees
+        where age in (25, 30, 35) and last_name like '%e%';
+
+
 -- Exercise 19
 
 -- Retrieve employees hired on one of these dates:
@@ -467,9 +476,31 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- and who are active.
 
 
+select *
+from employees
+where is_active = 1 AND hire_date IN ('2020-01-15','2019-03-10','2021-02-12');
+
+select *
+from employees
+where is_active = 1 AND (hire_date = '2020-01-15' or hire_date = '2019-03-10' OR hire_date = '2021-02-12');
+
+select *
+from employees
+where is_active = 1 AND hire_date = '2020-01-15';
+
 -- Exercise 20
 
 -- Retrieve employees who work in Support, IT, or Finance, whose salary is between $40,000 and $60,000, and who are younger than 32.
+
+select *
+from employees
+where department IN ('IT','Support','Finance') AND (salary between 55000 AND 60000) AND age < 32;
+
+select *
+from employees
+where department IN ('IT','Support','Finance') AND age < 32 ORDER BY salary DESC;
+
+
 
 -- Level 5 — Multiple Combined Conditions (21–25)
 
@@ -481,6 +512,18 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- earn between $45,000 and $65,000,
 -- and whose first name starts with M.
 
+select *
+from employees
+where department  = 'IT'
+AND salary between 45000 AND 65000
+AND first_name LIKE 'l%';
+
+-- Versión de SMS que no distingue mayus y minus, consulta para saber la distribución de SQL
+
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'Collation') AS DatabaseCollation;
+
+
+
 -- Exercise 22
 
 -- Retrieve employees who:
@@ -488,6 +531,14 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in HR or Finance,
 -- are older than 30,
 -- and whose last name ends with n.
+
+
+select *
+from employees
+where (department = 'HR' OR department = 'Finance')
+AND age > 30
+AND last_name LIKE '%n';
+
 
 -- Exercise 23
 
@@ -497,6 +548,20 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- have a salary greater than $50,000,
 -- and whose email contains company.
 
+select *
+from employees
+where department <> 'Management' 
+AND salary > 50000
+AND email LIKE '%company%';
+
+
+select *
+from employees
+where department <> 'Management' 
+AND salary > 50000
+AND email LIKE '%company%' ORDER BY salary ASC;
+
+
 -- Exercise 24
 
 -- Retrieve employees who:
@@ -505,6 +570,21 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- are active,
 -- and whose first name does not start with J.
 
+
+select *
+from employees
+where is_active = 1
+AND (department = 'Sales' OR department = 'Marketing')
+AND first_name NOT LIKE 'J%' ORDER BY first_name ASC; 
+
+select *
+from employees
+where (department = 'Sales' OR department = 'Marketing')
+AND is_active = 1
+AND first_name NOT LIKE 'J%' ORDER BY first_name ASC; 
+
+
+
 -- Exercise 25
 
 -- Retrieve employees who:
@@ -512,6 +592,14 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- are younger than 35,
 -- work in IT, HR, or Support,
 -- and whose salary is not between $40,000 and $50,000.
+
+select *
+from employees
+where age < 35
+AND department IN ('IT','HR','Support')
+AND salary NOT BETWEEN 40000 AND 50000; 
+
+
 -- Level 6 — Complex Logical Expressions (26–30)
 
 -- Exercise 26
@@ -521,6 +609,13 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in IT and earn more than $60,000, OR
 -- work in Finance and are older than 35.
 
+select *
+from employees
+where (department = 'IT' AND salary > 60000)
+OR (department = 'Finance' AND age > 35)
+ORDER BY department ASC;
+
+
 -- Exercise 27
 
 -- Retrieve employees who satisfy one of these conditions:
@@ -529,12 +624,28 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in Marketing and earn less than $45,000,
 -- work in Support and are younger than 30.
 
+select *
+from employees
+where (department = 'HR' AND first_name LIKE 'A%')
+OR (department = 'Marketing' AND salary < 45000)
+OR (department = 'Support' AND age < 30)
+ORDER BY department ASC;
+
+
+
 -- Exercise 28
 
 -- Retrieve employees who satisfy either of these conditions:
 
 -- are active, work in IT, and their salary is between $45,000 and $60,000,
 -- are inactive and work in HR.
+
+select *
+from employees
+where (is_active = 1  AND department = 'IT' AND salary BETWEEN 45000 AND 60000)
+OR (is_active = 0 AND department = 'HR');
+
+
 
 -- Exercise 29
 
@@ -543,6 +654,15 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- their last name ends with er and they work in Sales,
 -- their first name contains the letter o and they work in Finance,
 -- they work in IT and were hired after January 1, 2020.
+
+select *
+from employees
+where (last_name LIKE '%er' AND department = 'Sales')
+OR (first_name LIKE '%o%' AND department = 'Finance')
+OR (department = 'IT' AND hire_date > '2020-01-01');
+
+
+
 
 -- Exercise 30
 

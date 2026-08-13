@@ -55,3 +55,22 @@ where department = 'HR'
 select *
 from employees
 where department  = 'Human Resources';
+
+
+--------------------DELETE----------------------------
+
+select *
+from employees;
+
+delete from employees
+where age > 40;
+
+-- Eliminar todos los registros 100 y finanzas
+
+select *
+from employees
+where department = 'Finance' AND vacation_hours > 100;
+
+delete from employees
+where department = 'Finance' AND vacation_hours > 100;
+
