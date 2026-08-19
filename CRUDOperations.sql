@@ -26,6 +26,7 @@ select COUNT(*)
 from employees
 where rating = 4.70;
 
+
 update employees 
 	set salary = salary + 1000
 		where rating = 4.70;
@@ -55,3 +56,17 @@ where department = 'HR'
 select *
 from employees
 where department  = 'Human Resources';
+
+-----------------------DELETE-----------------------------
+
+select *
+	from employees;
+
+delete 
+	from employees
+		where age > 40;
+	
+-- Eliminar todos los registros donde las horas de vacaciones acumuladas sean mas de 100 y esten en finanzas
+delete 
+	from employees 
+		where department = 'Finance' and vacation_hours > 100;

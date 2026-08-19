@@ -2,6 +2,8 @@ CREATE DATABASE employeesdb_relations;
 
 USE employeesdb_relations;
 
+
+
 -- drop database employeesdb_relations;
 
 CREATE TABLE employee(
@@ -125,20 +127,48 @@ VALUES
 
 select * from employee;
 
-select e.first_name,  
-from employee e, department d;
+select * from employee
+    where department_id = 3;
 
-select e.first_name, e.salary, d.department_name, d.department_code
-from employee e, department d;
+delete 
+    from department
+        where department_id = 3;
 
-select e.first_name as primer_nombre, e.salary, d.department_code as codigo_departamento, d.department_name
-    from employee e, department d
-        where e.salary > 50000
-            order by first_name asc;
+delete 
+    from employee
+        where employee_id = 51;
+
+select * from employee
+    where department_id = 3;
+
+select * 
+    from department;
+
+update department 
+    set department_name = 'Finanzas'
+        where department_id = 3;
+
+
+-- (1,2,3)
+
+-- (a,b)
+
+-- 1a, 1b, 2a, 2b, 3a, 3b
+-- EVITAR
+select *
+    from employee, department;
+
+
+select e.first_name as First_Name, d.department_name
+    from employee e, department d;
+
+select e.department_id, d.department_id
+    from employee e, department d;
+
+
+-- inner join 
+select *
+    from employee e INNER JOIN department d ON e.department_id = d.department_id;
 
 select *
-from employee e INNER JOIN department d on d.department_id = e.department_id;
-
-
-
-
+    from department d INNER JOIN employee e ON e.department_id = d.department_id;

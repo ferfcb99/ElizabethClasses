@@ -4,12 +4,12 @@ USE employeesdb;
 
 CREATE TABLE employees(
 
-    employee_id INT IDENTITY(1,1) PRIMARY KEY,
+    employee_id INT IDENTITY(1,1) PRIMARY KEY, -- 1 2 3 4 
     first_name NVARCHAR(50),
     last_name NVARCHAR(50),
     email NVARCHAR(100),
     age TINYINT,
-    salary DECIMAL(10,2),
+    salary DECIMAL(10,2), -- money, float, 69500.00 -> 69,500.00
     hire_date DATE,
     last_login DATETIME,
     is_active BIT, -- 0 1
@@ -443,6 +443,10 @@ select *
 from employees
 where department IN ('IT','HR','Finance') AND salary > 55000;
 
+select *
+from employees
+where (department = 'IT' or department = 'HR' or department = 'Finance') AND salary > 55000;
+
 -- Exercise 17
 
 -- Retrieve employees who do not work in Sales or Marketing and are active.
@@ -455,6 +459,13 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 
 -- Retrieve employees whose age is 25, 30, or 35, and whose last name contains the letter e.
 
+select *
+    from employees
+        where (age = 25 or age = 30 or age = 35) and last_name like '%e%';
+
+select *
+    from employees
+        where age in (25, 30, 35) and last_name like '%e%';
 
 -- Exercise 19
 
@@ -465,11 +476,28 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- 2021-02-12
 
 -- and who are active.
+select *
+    from employees
+        where hire_date in ('2020-01-15', '2019-03-10', '2021-02-12') and is_active = 1;
+
+select *
+    from employees
+        where (hire_date = '2020-01-15' or hire_date = '2019-03-10' or hire_date =  '2021-02-12') and is_active = 1;
+
+select * 
+    from employees 
+        where hire_date = '2020-01-15';
+
 
 
 -- Exercise 20
 
 -- Retrieve employees who work in Support, IT, or Finance, whose salary is between $40,000 and $60,000, and who are younger than 32.
+
+select * 
+    from employees 
+        where department in ('Support', 'IT', 'Finance') and (salary between 55000 and 60000) and age < 32;
+
 
 -- Level 5 — Multiple Combined Conditions (21–25)
 
@@ -481,6 +509,12 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- earn between $45,000 and $65,000,
 -- and whose first name starts with M.
 
+select * 
+    from employees 
+        where department in ('IT') and 
+                salary between 45000 and 65000 and first_name like 'M%';
+
+
 -- Exercise 22
 
 -- Retrieve employees who:
@@ -488,6 +522,10 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in HR or Finance,
 -- are older than 30,
 -- and whose last name ends with n.
+select * 
+    from employees 
+        where department in ('HR', 'Finance') and 
+                age > 30 and last_name like '%n';
 
 -- Exercise 23
 
@@ -497,6 +535,11 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- have a salary greater than $50,000,
 -- and whose email contains company.
 
+select * 
+    from employees 
+        where department not in ('HR', 'Finance') and 
+                salary > 50000 and email like '%company%';
+
 -- Exercise 24
 
 -- Retrieve employees who:
@@ -504,6 +547,13 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in Sales or Marketing,
 -- are active,
 -- and whose first name does not start with J.
+
+select * 
+    from employees 
+        where first_name not like 'J%' 
+        AND (department = 'Sales' or department = 'Marketing')
+        AND is_active = 1;
+
 
 -- Exercise 25
 
@@ -529,6 +579,8 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in Marketing and earn less than $45,000,
 -- work in Support and are younger than 30.
 
+
+
 -- Exercise 28
 
 -- Retrieve employees who satisfy either of these conditions:
@@ -552,3 +604,42 @@ where is_active = 1 AND department NOT IN ('Sales','Marketing');
 -- work in Finance, earn more than $60,000, and their last name starts with M,
 -- work in HR or Sales, have a salary between $45,000 and $55,000, and their email contains company,
 -- work in Support, are inactive, and were hired before January 1, 2020.
+
+
+-- Basic GROUP BY
+-- SUM, AVG, MAX, MIX, COUNT -> funcion de agregacion
+-- 1. Number of employees in each department
+select department, count(*) as employee_count
+    from employees
+        group by department
+            order by employee_count asc;
+
+
+-- 2. Average salary for each department
+SELECT
+    department,
+    AVG(salary) AS average_salary
+FROM employees
+GROUP BY department;
+
+-- 3. Highest salary in each department
+
+
+
+
+-- 4. Lowest salary in each department
+
+
+
+
+-- 5. Total salary per department
+
+
+
+select departament, count(*) as employee_count, 
+                     AVG(salary) AS average_salary,
+                     MAX(salary) AS highest_salary,
+                     MIN(salary) AS lowest_salary,
+                     sum(salary) AS total_salary
+    from employees
+        group by department;
