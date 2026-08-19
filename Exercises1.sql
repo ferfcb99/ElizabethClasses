@@ -467,6 +467,15 @@ select *
     from employees
         where age in (25, 30, 35) and last_name like '%e%';
 
+select *
+    from employees
+        where (age = 25 or age = 30 or age = 35) and last_name like '%e%';
+
+select *
+    from employees
+        where age in (25, 30, 35) and last_name like '%e%';
+
+
 -- Exercise 19
 
 -- Retrieve employees hired on one of these dates:
@@ -490,13 +499,36 @@ select *
 
 
 
+select *
+from employees
+where is_active = 1 AND hire_date IN ('2020-01-15','2019-03-10','2021-02-12');
+
+select *
+from employees
+where is_active = 1 AND (hire_date = '2020-01-15' or hire_date = '2019-03-10' OR hire_date = '2021-02-12');
+
+select *
+from employees
+where is_active = 1 AND hire_date = '2020-01-15';
+
 -- Exercise 20
 
 -- Retrieve employees who work in Support, IT, or Finance, whose salary is between $40,000 and $60,000, and who are younger than 32.
 
+<<<<<<< HEAD
 select * 
     from employees 
         where department in ('Support', 'IT', 'Finance') and (salary between 55000 and 60000) and age < 32;
+=======
+select *
+from employees
+where department IN ('IT','Support','Finance') AND (salary between 55000 AND 60000) AND age < 32;
+
+select *
+from employees
+where department IN ('IT','Support','Finance') AND age < 32 ORDER BY salary DESC;
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 -- Level 5 — Multiple Combined Conditions (21–25)
@@ -509,10 +541,23 @@ select *
 -- earn between $45,000 and $65,000,
 -- and whose first name starts with M.
 
+<<<<<<< HEAD
 select * 
     from employees 
         where department in ('IT') and 
                 salary between 45000 and 65000 and first_name like 'M%';
+=======
+select *
+from employees
+where department  = 'IT'
+AND salary between 45000 AND 65000
+AND first_name LIKE 'l%';
+
+-- Versión de SMS que no distingue mayus y minus, consulta para saber la distribución de SQL
+
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'Collation') AS DatabaseCollation;
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 -- Exercise 22
@@ -527,6 +572,14 @@ select *
         where department in ('HR', 'Finance') and 
                 age > 30 and last_name like '%n';
 
+
+select *
+from employees
+where (department = 'HR' OR department = 'Finance')
+AND age > 30
+AND last_name LIKE '%n';
+
+
 -- Exercise 23
 
 -- Retrieve employees who:
@@ -535,10 +588,26 @@ select *
 -- have a salary greater than $50,000,
 -- and whose email contains company.
 
+<<<<<<< HEAD
 select * 
     from employees 
         where department not in ('HR', 'Finance') and 
                 salary > 50000 and email like '%company%';
+=======
+select *
+from employees
+where department <> 'Management' 
+AND salary > 50000
+AND email LIKE '%company%';
+
+
+select *
+from employees
+where department <> 'Management' 
+AND salary > 50000
+AND email LIKE '%company%' ORDER BY salary ASC;
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 -- Exercise 24
 
@@ -548,11 +617,27 @@ select *
 -- are active,
 -- and whose first name does not start with J.
 
+<<<<<<< HEAD
 select * 
     from employees 
         where first_name not like 'J%' 
         AND (department = 'Sales' or department = 'Marketing')
         AND is_active = 1;
+=======
+
+select *
+from employees
+where is_active = 1
+AND (department = 'Sales' OR department = 'Marketing')
+AND first_name NOT LIKE 'J%' ORDER BY first_name ASC; 
+
+select *
+from employees
+where (department = 'Sales' OR department = 'Marketing')
+AND is_active = 1
+AND first_name NOT LIKE 'J%' ORDER BY first_name ASC; 
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 -- Exercise 25
@@ -562,6 +647,14 @@ select *
 -- are younger than 35,
 -- work in IT, HR, or Support,
 -- and whose salary is not between $40,000 and $50,000.
+
+select *
+from employees
+where age < 35
+AND department IN ('IT','HR','Support')
+AND salary NOT BETWEEN 40000 AND 50000; 
+
+
 -- Level 6 — Complex Logical Expressions (26–30)
 
 -- Exercise 26
@@ -571,6 +664,13 @@ select *
 -- work in IT and earn more than $60,000, OR
 -- work in Finance and are older than 35.
 
+select *
+from employees
+where (department = 'IT' AND salary > 60000)
+OR (department = 'Finance' AND age > 35)
+ORDER BY department ASC;
+
+
 -- Exercise 27
 
 -- Retrieve employees who satisfy one of these conditions:
@@ -579,6 +679,16 @@ select *
 -- work in Marketing and earn less than $45,000,
 -- work in Support and are younger than 30.
 
+<<<<<<< HEAD
+=======
+select *
+from employees
+where (department = 'HR' AND first_name LIKE 'A%')
+OR (department = 'Marketing' AND salary < 45000)
+OR (department = 'Support' AND age < 30)
+ORDER BY department ASC;
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 -- Exercise 28
@@ -588,6 +698,13 @@ select *
 -- are active, work in IT, and their salary is between $45,000 and $60,000,
 -- are inactive and work in HR.
 
+select *
+from employees
+where (is_active = 1  AND department = 'IT' AND salary BETWEEN 45000 AND 60000)
+OR (is_active = 0 AND department = 'HR');
+
+
+
 -- Exercise 29
 
 -- Retrieve employees who satisfy one of the following:
@@ -595,6 +712,15 @@ select *
 -- their last name ends with er and they work in Sales,
 -- their first name contains the letter o and they work in Finance,
 -- they work in IT and were hired after January 1, 2020.
+
+select *
+from employees
+where (last_name LIKE '%er' AND department = 'Sales')
+OR (first_name LIKE '%o%' AND department = 'Finance')
+OR (department = 'IT' AND hire_date > '2020-01-01');
+
+
+
 
 -- Exercise 30
 
@@ -606,6 +732,24 @@ select *
 -- work in Support, are inactive, and were hired before January 1, 2020.
 
 
+<<<<<<< HEAD
+=======
+select *
+from employees
+where (department = 'IT' AND age <30 AND is_active = 1)
+OR (department = 'Finance' AND salary > 60000 AND last_name LIKE 'M%')
+OR (department in ('HR','Sales') AND salary between 45000 AND 55000 AND email LIKE '%company%')
+OR (department = 'Support' AND is_active = 0 AND hire_date < '2020-01-01')
+ORDER BY department;
+
+
+
+
+
+--------------------------
+
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 -- Basic GROUP BY
 -- SUM, AVG, MAX, MIX, COUNT -> funcion de agregacion
 -- 1. Number of employees in each department
@@ -616,6 +760,7 @@ select department, count(*) as employee_count
 
 
 -- 2. Average salary for each department
+<<<<<<< HEAD
 SELECT
     department,
     AVG(salary) AS average_salary
@@ -624,16 +769,39 @@ GROUP BY department;
 
 -- 3. Highest salary in each department
 
+=======
+
+select department, AVG(salary) as Salario_Promedio
+from employees
+group by department
+order by Salario_Promedio DESC;
+
+
+-- 3. Highest salary in each department
+
+select department, MAX(salary) as Salario_Maximo
+from employees
+group by department
+order by Salario_Maximo DESC;
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 
 -- 4. Lowest salary in each department
 
+<<<<<<< HEAD
+=======
+select department, MIN(salary) as Salario_Minimo
+from employees
+group by department
+order by Salario_Minimo ASC;
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
 
 
 
 -- 5. Total salary per department
 
+<<<<<<< HEAD
 
 
 select departament, count(*) as employee_count, 
@@ -643,3 +811,12 @@ select departament, count(*) as employee_count,
                      sum(salary) AS total_salary
     from employees
         group by department;
+=======
+select department, SUM(salary) as Salario_Total
+from employees
+group by department
+order by Salario_Total ASC;
+
+
+
+>>>>>>> 91a180d7c971fbcf7c04a647205bab7966a8e8bb
