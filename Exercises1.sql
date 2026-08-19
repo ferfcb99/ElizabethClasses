@@ -672,3 +672,64 @@ OR (department = 'IT' AND hire_date > '2020-01-01');
 -- work in Finance, earn more than $60,000, and their last name starts with M,
 -- work in HR or Sales, have a salary between $45,000 and $55,000, and their email contains company,
 -- work in Support, are inactive, and were hired before January 1, 2020.
+
+
+select *
+from employees
+where (department = 'IT' AND age <30 AND is_active = 1)
+OR (department = 'Finance' AND salary > 60000 AND last_name LIKE 'M%')
+OR (department in ('HR','Sales') AND salary between 45000 AND 55000 AND email LIKE '%company%')
+OR (department = 'Support' AND is_active = 0 AND hire_date < '2020-01-01')
+ORDER BY department;
+
+
+
+
+
+--------------------------
+
+
+-- Basic GROUP BY
+-- SUM, AVG, MAX, MIX, COUNT -> funcion de agregacion
+-- 1. Number of employees in each department
+select department, count(*) as employee_count
+    from employees
+        group by department
+            order by employee_count asc;
+
+
+-- 2. Average salary for each department
+
+select department, AVG(salary) as Salario_Promedio
+from employees
+group by department
+order by Salario_Promedio DESC;
+
+
+-- 3. Highest salary in each department
+
+select department, MAX(salary) as Salario_Maximo
+from employees
+group by department
+order by Salario_Maximo DESC;
+
+
+
+-- 4. Lowest salary in each department
+
+select department, MIN(salary) as Salario_Minimo
+from employees
+group by department
+order by Salario_Minimo ASC;
+
+
+
+-- 5. Total salary per department
+
+select department, SUM(salary) as Salario_Total
+from employees
+group by department
+order by Salario_Total ASC;
+
+
+
