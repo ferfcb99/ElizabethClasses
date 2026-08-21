@@ -147,3 +147,64 @@ select *
 
 select *
     from department d INNER JOIN employee e ON e.department_id = d.department_id;
+
+-- Phase 1: INNER JOINS with Filtering and Sorting (1-10)
+1. Retrieve the first name, last name, and department name for all active employees.
+
+2. Find the emails and department codes of all employees who are older than 35.
+
+3. Show the first name, salary, and department name for all employees earning more than $75,000.
+
+4. List the full details of employees and their departments for anyone hired after January 1, 2021.
+
+5. Find the employee names, ratings, and department names for employees with a performance rating between 4.0 and 4.5.
+
+6. Retrieve the names and department names of all employees whose last name starts with the letter 'S'.
+
+7. Find all employees who work in either the 'Sales' or 'Marketing' departments, showing their name and department.
+
+8. Retrieve the names, salaries, and department names of all employees, sorted by their salary from highest to lowest.
+
+9. Find all inactive employees, showing their name, hire date, and department name, ordered by their hire date (oldest first).
+
+10. Which employees have a rating greater than 4.5 AND work in the 'Finance' department?
+
+11. Show a list of ALL departments and the first names of employees in them, including departments that currently have no employees.
+
+12. Rewrite the exact same results as exercise 11, but use a RIGHT JOIN instead.
+
+13. Find the names of the departments that currently have ZERO employees.
+
+14. Show all departments and the names of employees earning over $100,000. If a department has no high earners, still show the department name.
+
+15. List all departments alongside employee names. If a department has no employees, display the text 'No Staff' instead of a NULL value.
+
+16. Find all departments that have no active employees (this includes completely empty departments OR departments where everyone is inactive).
+
+17. Use a RIGHT JOIN to list all employees and their departments, but only for employees who have more than 100 vacation hours.
+
+18. Show all departments, and only include employees who have notes on their profile (notes IS NOT NULL). Keep departments in the result even if no one has notes.
+
+19. List all departments and their employees' names, but sort the results so that departments with no employees appear at the very top.
+
+20. Find departments that either have no employees OR have employees whose last login was before September 2023.
+
+21. Find the average salary of employees per department, showing the department name.
+
+22. Count the total number of employees in EVERY department, including those with 0 employees.
+
+23. Find departments where the average employee salary is greater than $75,000, using an INNER JOIN.
+
+24. Calculate the total (SUM) vacation hours available in every department. If a department has no employees, it should show 0 instead of NULL.
+
+25. Find the names of departments that have more than 3 active employees who were hired before 2022.
+
+26. Show the department name, and the highest salary (MAX) in that department, but only for departments where the highest salary is over $90,000.
+
+27. Create a query that uses an INNER JOIN to display the employee's full name (first and last concatenated) alongside their department code, for all employees with a rating of 4.5 or higher.
+
+28. Find all departments that have exactly 0 inactive employees (meaning everyone in the department is active, or the department is completely empty).
+
+29. List the department name, average age, and average rating of employees in each department, but exclude the 'Executive' and 'Administration' departments from the results entirely.
+
+30. List EVERY department name and the count of their active employees. Sort the results so the departments with the most active employees are at the top, and empty departments are at the bottom.
