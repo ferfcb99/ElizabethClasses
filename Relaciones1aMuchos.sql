@@ -8,7 +8,7 @@ CREATE TABLE employee(
 
     employee_id INT IDENTITY(1,1) PRIMARY KEY,
     first_name NVARCHAR(50),
-    last_name NVARCHAR(50),
+    last_name NVARCHAR(50), -- Wrapper, primitiva
     email NVARCHAR(100),
     age TINYINT,
     salary DECIMAL(10,2),
@@ -223,19 +223,64 @@ select e.first_name, e.last_name, e.rating, d.department_name
 
 -- 11. Show a list of ALL departments and the first names of employees in them, including departments that currently have no employees.
 
+select count(*)
+    from employee e 
+        where notes IS NOT NULL;
+select * 
+    from department;
+
+select * 
+    from employee e
+        order by e.department_id;
+
+select d.department_name, e.first_name
+    from department d left join employee e ON d.department_id  = e.department_id
+        order by e.department_id;
 
 
 -- 12. Rewrite the exact same results as exercise 11, but use a RIGHT JOIN instead.
 
+select d.department_name, e.first_name
+    from department d right join employee e ON d.department_id  = e.department_id
+        order by e.department_id;
+
 -- 13. Find the names of the departments that currently have ZERO employees.
+
+select d.department_name, e.first_name
+    from department d left join employee e ON d.department_id  = e.department_id
+        where e.department_id is null;
+
+select d.department_name, e.first_name
+    from employee e right join department d ON d.department_id  = e.department_id
+        where e.department_id is null;
 
 -- 14. Show all departments and the names of employees earning over $100,000. If a department has no high earners, still show the department name.
 
+select d.department_name, e.first_name, e.salary
+    from department d left join employee e ON d.department_id  = e.department_id AND e.salary > 100000;
+
+
 -- 15. List all departments alongside employee names. If a department has no employees, display the text 'No Staff' instead of a NULL value.
+select d.department_name, ISNULL(e.first_name, 'No staff')
+    from department d LEFT JOIN employee e ON d.department_id = e.department_id;
+
 
 -- 16. Find all departments that have no active employees (this includes completely empty departments OR departments where everyone is inactive).
+SELECT d.department_name
+FROM department d
+LEFT JOIN employee e ON d.department_id = e.department_id AND e.is_active = 0
+WHERE e.employee_id IS NULL;
 
--- 17. Use a RIGHT JOIN to list all employees and their departments, but only for employees who have more than 100 vacation hours.
+-- 16.1 Agrupar cuantos empleados activos hay por departamento
+-- 16.2 Agrupar cuantos empleados inactivos hay por departamento
+
+
+-- 17. Use a RIGHT JOIN to list all employees and their departments, but only for employees who have more than 100 vacation hours.SELECT e.first_name, e.vacation_hours, d.department_name
+SELECT e.first_name, e.vacation_hours, d.department_name
+FROM department d
+RIGHT JOIN employee e ON d.department_id = e.department_id
+WHERE e.vacation_hours > 100;
+
 
 -- 18. Show all departments, and only include employees who have notes on their profile (notes IS NOT NULL). Keep departments in the result even if no one has notes.
 
