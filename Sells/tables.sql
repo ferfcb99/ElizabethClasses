@@ -8,6 +8,12 @@ CREATE TABLE Category (
     description VARCHAR(255)
 );
 
+INSERT INTO Category(name, description) VALUES ('Bebidas', 'Bebidas sin azucar');
+
+INSERT INTO Category(name, description) VALUES ('Ropa de Bebe', 'Camisetas'),
+                                               ('Ropa de Bebe', 'Mameluco');
+
+
 CREATE TABLE CustomerType (
     customer_type_id INT PRIMARY KEY IDENTITY(1,1),
     name VARCHAR(100) NOT NULL,
@@ -47,3 +53,38 @@ CREATE TABLE Purchase(
     foreign key(product_id) references Product(product_id),
     foreign key(customer_id) references Customer(customer_id)
 );
+
+CREATE TABLE paymentMethod(
+    id_payment_method varchar(10) not null,
+    name_payment_method varchar(30) not null,
+    created_at datetime, -- null
+    primary key(id_payment_method) --constraints
+);
+
+
+INSERT INTO paymentMethod(id_payment_method, name_payment_method, created_at)
+VALUES ('PM001','Efectivo','2026-09-08 10:00:00');
+
+INSERT INTO paymentMethod(id_payment_method, name_payment_method, created_at)
+VALUES ('PM002','Paypal','2026-09-08 10:00:00'),
+       ('PM003','Paytrue','2026-09-08 10:00:00');
+
+INSERT INTO paymentMethod(id_payment_method, name_payment_method, created_at)
+VALUES ('PM004','Debito',NULL);
+
+Select *
+from paymentMethod;
+
+
+
+-- Insertar columnas sobre tablas que ya existen
+
+ALTER TABLE paymentMethod 
+ADD description VARCHAR(50);
+
+
+-- ALTER TABLE paymentMethod 
+-- ADD updated_at datetime not null;
+
+
+-- Actualizar columnas
